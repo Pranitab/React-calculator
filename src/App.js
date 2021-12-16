@@ -22,8 +22,10 @@ function reducer(state, {type,payload}){
         ...state,
         currentOperand:`${state.currentOperand || ''}${payload.digit}`
       }
+
      case ACTION.CLEAR:
-       return {} 
+       return {}
+
      case ACTION.CHOOSE_OPERATION:
           if(state.currentOperand == null && state.previousOperand == null)
           return state;
@@ -63,6 +65,7 @@ function reducer(state, {type,payload}){
          currentOperand : evaluate(state),
          override:true
        }
+
       case ACTION.DELETE_DIGIT:
         if (state.overwrite) {
           return {
@@ -80,6 +83,9 @@ function reducer(state, {type,payload}){
           ...state,
           currentOperand: state.currentOperand.slice(0, -1),
         } 
+
+        default:
+          console.log("No operation Provided");
 
   }
 }
@@ -102,6 +108,8 @@ function evaluate({currentOperand, previousOperand, operation}){
         case "/":
         computaion = prev / current;
         break;
+        default:
+          console.log("No operation Provided");
     }
     return computaion.toString();
 }
